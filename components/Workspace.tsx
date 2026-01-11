@@ -50,7 +50,6 @@ const Workspace: React.FC<WorkspaceProps> = ({ user }) => {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [viewport, setViewport] = useState<Viewport>({ x: 300, y: 200, zoom: 0.8 });
   const [activeSidebarTab, setActiveSidebarTab] = useState<'measurements' | 'blocks' | 'curves' | 'ai' | 'properties'>('measurements');
-  const [blockCategory, setBlockCategory] = useState<'women' | 'men' | 'children' | 'unisex'>('women');
 
   useEffect(() => {
     if (selectedIds.length > 0) {

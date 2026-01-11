@@ -138,6 +138,28 @@ export const generateMensShirt = (m: Measurements): VectorElement[] => {
 /**
  * CHILDREN'S BASIC BLOCKS (Ages 2-16)
  */
+export const generateChildBodice = (m: Measurements): VectorElement[] => {
+  const elements: VectorElement[] = [];
+  const bQ = (m.bust / 4) + 1; // Basic ease for children
+  const wQ = (m.waist / 4) + 1;
+  const neckW = 2.5;
+  const neckD = 2.5;
+  const sSlope = 1;
+  
+  const nodes = [
+    createNode({ x: 0, y: neckD }), // CF Neck
+    createNode({ x: neckW, y: 0 }), // HPS
+    createNode({ x: m.shoulderWidth, y: sSlope }), // Shoulder
+    createNode({ x: bQ, y: 6 }), // Armhole bottom
+    createNode({ x: wQ, y: m.backLength }), // Waist
+    createNode({ x: 0, y: m.backLength }), // CF Waist
+  ];
+  elements.push(generatePatternPiece(nodes, 'Child Bodice Front'));
+  elements.push(createGrainline(bQ / 2, 2, m.backLength - 4));
+  
+  return elements;
+};
+
 /**
  * FRENCH CURVE LIBRARY
  */
