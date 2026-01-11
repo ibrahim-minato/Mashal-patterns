@@ -508,18 +508,31 @@ const Workspace: React.FC<WorkspaceProps> = ({ user }) => {
 
       <div className="flex flex-grow overflow-hidden">
         {/* Left Tool Sidebar */}
-        <div className="w-14 border-r bg-[#121212] flex flex-col items-center py-4 gap-1 z-40">
-          {[ 
-            {id:'select',icon:MousePointer2},
-            {id:'node',icon:MousePointer},
+        <div className="w-14 border-r bg-[#121212] flex flex-col items-center py-4 gap-1 z-40 overflow-y-auto custom-scrollbar">
+          {[
+            {id:'select',icon:MousePointer2}, 
+            {id:'node',icon:MousePointerSquareDashed},
+            {id:'tweak',icon:Wand2},
+            {id:'spray',icon:SprayCan},
+            {id:'brush',icon:Brush},
             {id:'pencil',icon:Pencil},
+            {id:'bezier',icon:PenTool},
             {id:'rect',icon:Square},
             {id:'circle',icon:CircleDot},
+            {id:'poly',icon:Pentagon},
+            {id:'star',icon:Star},
+            {id:'spiral',icon:RefreshCw},
+            {id:'box3d',icon:Boxes},
             {id:'text',icon:Type},
+            {id:'gradient',icon:Palette},
+            {id:'dropper',icon:Eyedropper},
+            {id:'bucket',icon:PaintBucket},
             {id:'eraser',icon:Eraser},
+            {id:'measure',icon:Ruler},
+            {id:'zoom',icon:ZoomIn},
             {id:'pan',icon:Hand} 
           ].map(t => (
-            <button key={t.id} onClick={() => setActiveTool(t.id as ToolType)} className={`p-2.5 rounded-xl transition-all ${activeTool === t.id ? 'bg-indigo-600 text-white shadow-lg' : 'text-gray-500 hover:bg-white/5'}`}><t.icon size={18} /></button>
+            <button key={t.id} onClick={() => setActiveTool(t.id as ToolType)} className={`p-2.5 rounded-xl transition-all shrink-0 ${activeTool === t.id ? 'bg-indigo-600 text-white shadow-lg' : 'text-gray-500 hover:bg-white/5'}`}><t.icon size={18} /></button>
           ))}
         </div>
 
