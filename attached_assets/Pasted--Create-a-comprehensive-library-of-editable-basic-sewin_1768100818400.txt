@@ -1,0 +1,170 @@
+"Create a comprehensive library of editable basic sewing blocks (slopers) with the advanced Inkscape-style workspace:
+PATTERN BLOCK CATEGORIES:
+WOMEN'S BASIC BLOCKS:
+
+Bodice block (front & back)
+
+Fitted bodice with darts
+Shift/loose fit bodice
+
+
+Sleeve blocks (set-in sleeve, all lengths)
+Skirt blocks (straight, A-line, circle)
+Pants/trouser block (straight leg)
+Dress block (combined bodice + skirt)
+Collar blocks (flat, standing, convertible)
+Neckline variations (jewel, V-neck, scoop, boat)
+
+MEN'S BASIC BLOCKS:
+
+Shirt block (front & back)
+Pants/trouser block
+Jacket/blazer block
+Sleeve blocks (shirt sleeve, jacket sleeve)
+Collar blocks (shirt collar, mandarin)
+Vest/waistcoat block
+
+CHILDREN'S BASIC BLOCKS (Ages 2-16):
+
+Simple bodice block
+A-line dress block
+Pants block (elastic waist + fitted waist options)
+Shirt block
+Sleeve blocks (puffed, basic, raglan)
+Romper/jumpsuit block
+Shorts block
+
+UNISEX/GENDER-NEUTRAL BLOCKS:
+
+Oversized shirt/tunic
+Straight-cut pants
+Hoodie block
+T-shirt blocks (crew neck, V-neck)
+Shorts (athletic, casual)
+Outerwear blocks (basic jacket, coat)
+
+SIZE RANGE FOR EACH BLOCK:
+
+Women: US sizes 0-24 (XS-3XL)
+Men: US sizes S-3XL (chest 34"-54")
+Children:
+
+Toddler: 2T-5T
+Kids: 6-8
+Youth: 10-16
+
+
+
+EDITABLE PARAMETERS (Live Adjustment):
+
+Measurements inputs:
+
+Bust/chest circumference
+Waist circumference
+Hip circumference
+Shoulder width
+Arm length
+Inseam length
+Back width
+Neck circumference
+Rise (for pants)
+Custom ease allowances
+
+
+Pattern modifications:
+
+Dart placement and size (draggable)
+Seam allowance (0.25" to 1", adjustable)
+Hem allowance (adjustable)
+Grain line direction
+Notch placement (single, double, triple)
+Button/buttonhole placement
+Pocket placement guides
+
+
+
+PATTERN BLOCK FEATURES:
+
+Measurement chart overlay: Standard sizing tables built-in
+Grading between sizes: Smooth interpolation
+Custom measurement import: CSV or manual entry
+Pattern pieces labeled: Front, Back, Sleeve, etc. with cutting instructions
+Seam allowance toggle: Show with/without seam allowance
+Print layout optimizer: Arrange pieces efficiently on fabric width
+Fabric width presets: 45", 54", 60" standard widths
+Cutting layout generator: Shows how to lay pieces on fabric
+Fabric requirement calculator: Yards/meters needed
+
+TECHNICAL PATTERN MARKINGS:
+
+Grainline arrows (lengthwise, crosswise, bias)
+Notches (single, double for matching seams)
+Drill holes (for darts, pockets)
+"Place on fold" indicators
+Center front/back lines
+Bust point, waist, hip lines
+Dart legs and points
+Seam allowance lines (solid vs dashed)
+Pattern piece numbers
+"Cut 2" or "Cut 1 on fold" instructions
+
+DART MANIPULATION TOOLS:
+
+Pivot darts to new locations
+Convert darts to seams, pleats, or gathers
+Split darts
+Add/remove darts
+Dart transfer tool
+
+PATTERN DEVELOPMENT TOOLS:
+
+Slash and spread (for fullness)
+Slash and close (for fitting)
+Walk seams (check seam matching)
+True up seams (ensure curves match)
+Add flare to skirts/pants
+Blend between sizes
+
+STYLE VARIATIONS (One-Click Modifications):
+
+Neckline changes (15+ styles)
+Sleeve variations (cap, short, 3/4, long, bishop, bell, etc.)
+Skirt variations (pencil, gathered, pleated, tiered)
+Pant variations (wide leg, tapered, cropped)
+Waistband styles (fitted, elastic, faced)
+Hem styles (straight, curved, high-low)
+
+MEASUREMENT GUIDES:
+
+Body measurement diagram (how to measure correctly)
+Ease recommendations by garment type
+Size chart comparison (US, UK, EU, international)
+Growth allowance for children's patterns
+
+EXPORT & PRINTING:
+
+Print at actual size (tiled A4/Letter or large format)
+PDF with layers (seam allowance on/off layer)
+SVG for further editing
+DXF for commercial pattern cutting
+Print registration marks for accuracy
+Scale test square (print 1" square to verify scale)
+
+PATTERN LIBRARY ORGANIZATION:
+
+Search by garment type, gender, size
+Save custom blocks with measurements
+Version history for iterations
+Tag/categorize custom patterns
+Share patterns (export/import)
+
+ADDITIONAL FEATURES:
+
+Seam allowance calculator
+Fabric consumption estimator
+Pattern storage with thumbnail previews
+Notes section for each block
+Fitting adjustment guides (full bust, sway back, etc.)
+Body shape presets (pear, apple, hourglass, rectangle, etc.)
+
+Make all blocks fully parametric - when measurements change, the entire pattern automatically updates proportionally while maintaining proper pattern-making principles (dart placement, ease, proportions)."
