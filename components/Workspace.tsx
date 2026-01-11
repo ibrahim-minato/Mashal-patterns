@@ -383,7 +383,28 @@ const Workspace: React.FC<WorkspaceProps> = ({ user }) => {
       let base: any;
       if (det.type === 'circle') base = { id: Math.random().toString(36).substr(2,9), type: 'circle', nodes: [{id:'c', pos:(det.bounds as any).center, type:'corner'}, {id:'r', pos:{x:(det.bounds as any).center.x+(det.bounds as any).radius, y:(det.bounds as any).center.y}, type:'corner'}], closed: true, fill: fillColor, stroke: strokeColor, strokeWidth, opacity:1, x:0,y:0,scaleX:1,scaleY:1,rotation:0, name:'Circle' };
       else if (det.type === 'rect') base = { id: Math.random().toString(36).substr(2,9), type: 'rect', nodes: [{id:'n1', pos:(det.bounds as any).min, type:'corner'}, {id:'n2', pos:(det.bounds as any).max, type:'corner'}], closed: true, fill: fillColor, stroke: strokeColor, strokeWidth, opacity:1, x:0,y:0,scaleX:1,scaleY:1,rotation:0, name:'Rect' };
-      else base = { id: Math.random().toString(36).substr(2,9), type: 'path', nodes: pencilPoints.map((p,i)=>({id:`p${i}`, pos:p, type: activeTool === 'curve' ? 'smooth' : 'corner'})), closed: false, fill: 'none', stroke: strokeColor, strokeWidth, opacity:1, x:0,y:0,scaleX:1,scaleY:1,rotation:0, name: activeTool === 'curve' ? 'Curve' : 'Path' };
+      else {
+        // For Curve tool: simplify nodes to create a smoother spline
+        const samplingRate = activeTool === 'curve' ? 10 : 1;
+        const filteredNodes = pencilPoints.filter((_, i) => i % samplingRate === 0).map((p, i) => ({
+          id: `p${i}`,
+          pos: p,
+          type: activeTool === 'curve' ? 'smooth' : 'corner'
+        }));
+        
+        base = { 
+          id: Math.random().toString(36).substr(2,9), 
+          type: 'path', 
+          nodes: filteredNodes, 
+          closed: false, 
+          fill: 'none', 
+          stroke: strokeColor, 
+          strokeWidth, 
+          opacity:1, 
+          x:0,y:0,scaleX:1,scaleY:1,rotation:0, 
+          name: activeTool === 'curve' ? 'Curve' : 'Path' 
+        };
+      }
       const next = [...elements, ...applySymmetryToElement(base, symmetryMode)];
       setElements(next); saveHistory(next); setPencilPoints([]);
     }
