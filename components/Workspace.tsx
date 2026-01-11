@@ -40,7 +40,8 @@ interface NodeDragState {
 
 const Workspace: React.FC<WorkspaceProps> = ({ user }) => {
   const [activeTool, setActiveTool] = useState<ToolType>('select');
-  const [activeSidebarTab, setActiveSidebarTab] = useState<'measurements' | 'library' | 'ai'>('measurements');
+  const [activeSidebarTab, setActiveSidebarTab] = useState<'measurements' | 'blocks' | 'ai'>('measurements');
+  const [blockCategory, setBlockCategory] = useState<'women' | 'men' | 'children' | 'unisex'>('women');
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const [snapToGrid, setSnapToGrid] = useState(true);
   const [shapeAssist, setShapeAssist] = useState(true);
@@ -540,7 +541,7 @@ const Workspace: React.FC<WorkspaceProps> = ({ user }) => {
         <div className="w-80 border-r bg-[#121212] flex flex-col z-40 shadow-2xl overflow-hidden">
           <div className="flex border-b border-white/5 bg-black/40">
             <TabBtn id="measurements" icon={Sliders} label="Measures" />
-            <TabBtn id="library" icon={Library} label="Blocks" />
+            <TabBtn id="blocks" icon={Library} label="Blocks" />
             <TabBtn id="ai" icon={Sparkles} label="AI Asst" />
           </div>
 
@@ -557,20 +558,61 @@ const Workspace: React.FC<WorkspaceProps> = ({ user }) => {
               </div>
             )}
 
-            {activeSidebarTab === 'library' && (
-              <div className="space-y-4">
-                <p className="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-4">Drafting Blocks</p>
-                {[
-                  { name: 'Women Skirt', action: () => setElements([...elements, ...Blocks.generateWomenSkirt(measurements)]) },
-                  { name: 'Women Bodice', action: () => setElements([...elements, ...Blocks.generateWomenBodice(measurements)]) },
-                  { name: 'Mens Shirt', action: () => setElements([...elements, ...Blocks.generateMensShirt(measurements)]) },
-                  { name: 'Mens Trouser', action: () => setElements([...elements, ...Blocks.generatePantsBlock(measurements, true)]) },
-                  { name: 'Child Bodice', action: () => setElements([...elements, ...Blocks.generateChildBodice(measurements)]) },
-                ].map((item, i) => (
-                  <button key={i} onClick={item.action} className="w-full p-4 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between hover:bg-white/10 transition-all text-sm font-bold">
-                    {item.name} <ChevronRight size={16} className="text-indigo-400" />
-                  </button>
-                ))}
+            {activeSidebarTab === 'blocks' && (
+              <div className="space-y-6">
+                <div className="flex gap-1 p-1 bg-white/5 rounded-lg">
+                  {(['women', 'men', 'children', 'unisex'] as const).map(cat => (
+                    <button 
+                      key={cat}
+                      onClick={() => setBlockCategory(cat)}
+                      className={`flex-1 py-1.5 rounded-md text-[9px] font-black uppercase tracking-tighter transition-all ${blockCategory === cat ? 'bg-indigo-600 text-white shadow-lg' : 'text-gray-500 hover:text-gray-300'}`}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="space-y-3">
+                  {blockCategory === 'women' && [
+                    { name: 'Basic Bodice', icon: Shirt, action: () => setElements([...elements, ...Blocks.generateWomenBodice(measurements)]) },
+                    { name: 'Straight Skirt', icon: Square, action: () => setElements([...elements, ...Blocks.generateWomenSkirt(measurements)]) },
+                    { name: 'Tailored Pants', icon: Columns, action: () => setElements([...elements, ...Blocks.generatePantsBlock(measurements, false)]) },
+                  ].map((item, i) => (
+                    <button key={i} onClick={item.action} className="w-full p-4 rounded-xl bg-white/5 border border-white/10 flex items-center gap-4 hover:bg-white/10 transition-all text-sm font-bold group">
+                      <div className="p-2 bg-indigo-500/10 rounded-lg text-indigo-400 group-hover:bg-indigo-500 group-hover:text-white transition-all"><item.icon size={18}/></div>
+                      <span className="flex-grow text-left">{item.name}</span>
+                      <ChevronRight size={16} className="text-indigo-400/40" />
+                    </button>
+                  ))}
+
+                  {blockCategory === 'men' && [
+                    { name: 'Dress Shirt', icon: Shirt, action: () => setElements([...elements, ...Blocks.generateMensShirt(measurements)]) },
+                    { name: 'Classic Trouser', icon: Columns, action: () => setElements([...elements, ...Blocks.generatePantsBlock(measurements, true)]) },
+                  ].map((item, i) => (
+                    <button key={i} onClick={item.action} className="w-full p-4 rounded-xl bg-white/5 border border-white/10 flex items-center gap-4 hover:bg-white/10 transition-all text-sm font-bold group">
+                      <div className="p-2 bg-indigo-500/10 rounded-lg text-indigo-400 group-hover:bg-indigo-500 group-hover:text-white transition-all"><item.icon size={18}/></div>
+                      <span className="flex-grow text-left">{item.name}</span>
+                      <ChevronRight size={16} className="text-indigo-400/40" />
+                    </button>
+                  ))}
+
+                  {blockCategory === 'children' && [
+                    { name: 'Basic Bodice', icon: Baby, action: () => setElements([...elements, ...Blocks.generateChildBodice(measurements)]) },
+                  ].map((item, i) => (
+                    <button key={i} onClick={item.action} className="w-full p-4 rounded-xl bg-white/5 border border-white/10 flex items-center gap-4 hover:bg-white/10 transition-all text-sm font-bold group">
+                      <div className="p-2 bg-indigo-500/10 rounded-lg text-indigo-400 group-hover:bg-indigo-500 group-hover:text-white transition-all"><item.icon size={18}/></div>
+                      <span className="flex-grow text-left">{item.name}</span>
+                      <ChevronRight size={16} className="text-indigo-400/40" />
+                    </button>
+                  ))}
+
+                  {blockCategory === 'unisex' && (
+                    <div className="py-10 text-center space-y-2">
+                       <Box size={32} className="mx-auto text-white/10" />
+                       <p className="text-[10px] font-bold text-white/20 uppercase">Coming Soon</p>
+                    </div>
+                  )}
+                </div>
               </div>
             )}
 
