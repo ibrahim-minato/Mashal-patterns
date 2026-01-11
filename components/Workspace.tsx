@@ -40,8 +40,14 @@ interface NodeDragState {
 
 const Workspace: React.FC<WorkspaceProps> = ({ user }) => {
   const [activeTool, setActiveTool] = useState<ToolType>('select');
-  const [activeSidebarTab, setActiveSidebarTab] = useState<'measurements' | 'blocks' | 'ai'>('measurements');
+  const [activeSidebarTab, setActiveSidebarTab] = useState<'measurements' | 'blocks' | 'ai' | 'properties'>('measurements');
   const [blockCategory, setBlockCategory] = useState<'women' | 'men' | 'children' | 'unisex'>('women');
+
+  useEffect(() => {
+    if (selectedIds.length > 0) {
+      setActiveSidebarTab('properties');
+    }
+  }, [selectedIds]);
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const [snapToGrid, setSnapToGrid] = useState(true);
   const [shapeAssist, setShapeAssist] = useState(true);
@@ -543,9 +549,86 @@ const Workspace: React.FC<WorkspaceProps> = ({ user }) => {
             <TabBtn id="measurements" icon={Sliders} label="Measures" />
             <TabBtn id="blocks" icon={Library} label="Blocks" />
             <TabBtn id="ai" icon={Sparkles} label="AI Asst" />
+            <TabBtn id="properties" icon={Sliders} label="Object" />
           </div>
 
           <div className="flex-grow overflow-y-auto custom-scrollbar p-6">
+            {activeSidebarTab === 'properties' && (
+              <div className="space-y-6">
+                <p className="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-4">Object Properties</p>
+                {selectedIds.length > 0 ? (
+                  <div className="space-y-6">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-1">
+                        <label className="text-[10px] uppercase text-white/40">Scale X</label>
+                        <input 
+                          type="number" 
+                          step="0.1"
+                          value={elements.find(e => e.id === selectedIds[0])?.scaleX || 1}
+                          onChange={e => {
+                            const val = parseFloat(e.target.value);
+                            setElements(prev => prev.map(el => selectedIds.includes(el.id) ? { ...el, scaleX: val } : el));
+                          }}
+                          className="w-full bg-white/5 border border-white/10 rounded px-2 py-1 text-sm text-white"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-[10px] uppercase text-white/40">Scale Y</label>
+                        <input 
+                          type="number" 
+                          step="0.1"
+                          value={elements.find(e => e.id === selectedIds[0])?.scaleY || 1}
+                          onChange={e => {
+                            const val = parseFloat(e.target.value);
+                            setElements(prev => prev.map(el => selectedIds.includes(el.id) ? { ...el, scaleY: val } : el));
+                          }}
+                          className="w-full bg-white/5 border border-white/10 rounded px-2 py-1 text-sm text-white"
+                        />
+                      </div>
+                    </div>
+                    <div className="space-y-1">
+                      <label className="text-[10px] uppercase text-white/40">Rotation</label>
+                      <input 
+                        type="range" 
+                        min="0" max="360"
+                        value={elements.find(e => e.id === selectedIds[0])?.rotation || 0}
+                        onChange={e => {
+                          const val = parseFloat(e.target.value);
+                          setElements(prev => prev.map(el => selectedIds.includes(el.id) ? { ...el, rotation: val } : el));
+                        }}
+                        className="w-full h-1 bg-white/5 accent-indigo-500 rounded appearance-none"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="text-[10px] uppercase text-white/40">Stroke Color</label>
+                      <input 
+                        type="color"
+                        value={elements.find(e => e.id === selectedIds[0])?.stroke || '#ffffff'}
+                        onChange={e => {
+                          const val = e.target.value;
+                          setElements(prev => prev.map(el => selectedIds.includes(el.id) ? { ...el, stroke: val } : el));
+                        }}
+                        className="w-full h-10 bg-white/5 border border-white/10 rounded cursor-pointer"
+                      />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="text-[10px] uppercase text-white/40">Fill Color</label>
+                      <input 
+                        type="color"
+                        value={elements.find(e => e.id === selectedIds[0])?.fill === 'none' ? '#000000' : (elements.find(e => e.id === selectedIds[0])?.fill || '#000000')}
+                        onChange={e => {
+                          const val = e.target.value;
+                          setElements(prev => prev.map(el => selectedIds.includes(el.id) ? { ...el, fill: val } : el));
+                        }}
+                        className="w-full h-10 bg-white/5 border border-white/10 rounded cursor-pointer"
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <p className="text-sm text-white/20 italic">Select an object to edit its properties</p>
+                )}
+              </div>
+            )}
             {activeSidebarTab === 'measurements' && (
               <div className="space-y-4">
                 <p className="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-4">Body Specifications (IN)</p>
