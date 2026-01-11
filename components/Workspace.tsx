@@ -40,14 +40,7 @@ interface NodeDragState {
 
 const Workspace: React.FC<WorkspaceProps> = ({ user }) => {
   const [activeTool, setActiveTool] = useState<ToolType>('select');
-  const [activeSidebarTab, setActiveSidebarTab] = useState<'measurements' | 'blocks' | 'ai' | 'properties'>('measurements');
   const [blockCategory, setBlockCategory] = useState<'women' | 'men' | 'children' | 'unisex'>('women');
-
-  useEffect(() => {
-    if (selectedIds.length > 0) {
-      setActiveSidebarTab('properties');
-    }
-  }, [selectedIds]);
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const [snapToGrid, setSnapToGrid] = useState(true);
   const [shapeAssist, setShapeAssist] = useState(true);
@@ -56,6 +49,13 @@ const Workspace: React.FC<WorkspaceProps> = ({ user }) => {
   const [elements, setElements] = useState<VectorElement[]>([]);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [viewport, setViewport] = useState<Viewport>({ x: 300, y: 200, zoom: 0.8 });
+  const [activeSidebarTab, setActiveSidebarTab] = useState<'measurements' | 'blocks' | 'ai' | 'properties'>('measurements');
+
+  useEffect(() => {
+    if (selectedIds.length > 0) {
+      setActiveSidebarTab('properties');
+    }
+  }, [selectedIds]);
   
   // History State
   const [history, setHistory] = useState<VectorElement[][]>([[]]);
