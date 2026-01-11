@@ -113,35 +113,49 @@ export const generatePantsBlock = (m: Measurements, isMens: boolean = false): Ve
 export const generateMensShirt = (m: Measurements): VectorElement[] => {
   const elements: VectorElement[] = [];
   const bQ = (m.bust / 4) + 2; // Extra ease for shirt
+  const wQ = (m.waist / 4) + 1.5;
+  const hQ = (m.hip / 4) + 1.5;
   const neckW = 3.2;
+  const neckD = 3.5;
+  const sSlope = 1.75;
   
-  const nodes = [
-    createNode({ x: 0, y: 3 }),
-    createNode({ x: neckW, y: 0 }),
-    createNode({ x: m.shoulderWidth + 1, y: 1.5 }),
-    createNode({ x: bQ, y: 10 }),
-    createNode({ x: bQ, y: 30 }),
-    createNode({ x: 0, y: 30 }),
+  // Shirt Front
+  const frontNodes = [
+    createNode({ x: 0, y: neckD }), // CF Neck
+    createNode({ x: neckW, y: 0 }), // HPS
+    createNode({ x: m.shoulderWidth + 0.5, y: sSlope }), // Shoulder point
+    createNode({ x: bQ, y: 10 }), // Armhole bottom
+    createNode({ x: wQ, y: 18 }), // Waist
+    createNode({ x: hQ, y: 28 }), // Hip/Hem side
+    createNode({ x: 0, y: 28 }), // CF Hem
   ];
-  elements.push(generatePatternPiece(nodes, 'Mens Shirt Front'));
+  elements.push(generatePatternPiece(frontNodes, 'Mens Shirt Front'));
+  elements.push(createGrainline(bQ / 2, 5, 20));
+  
   return elements;
 };
 
 /**
- * CHILDREN'S BASIC BLOCKS
+ * CHILDREN'S BASIC BLOCKS (Ages 2-16)
  */
 export const generateChildBodice = (m: Measurements): VectorElement[] => {
   const elements: VectorElement[] = [];
-  const bQ = (m.bust / 4) + 1;
+  const bQ = (m.bust / 4) + 1; // Basic ease for children
+  const wQ = (m.waist / 4) + 1;
+  const neckW = 2.5;
+  const neckD = 2.5;
+  const sSlope = 1;
   
   const nodes = [
-    createNode({ x: 0, y: 2 }),
-    createNode({ x: 2.5, y: 0 }),
-    createNode({ x: m.shoulderWidth, y: 1 }),
-    createNode({ x: bQ, y: 6 }),
-    createNode({ x: bQ, y: m.backLength }),
-    createNode({ x: 0, y: m.backLength }),
+    createNode({ x: 0, y: neckD }), // CF Neck
+    createNode({ x: neckW, y: 0 }), // HPS
+    createNode({ x: m.shoulderWidth, y: sSlope }), // Shoulder
+    createNode({ x: bQ, y: 6 }), // Armhole bottom
+    createNode({ x: wQ, y: m.backLength }), // Waist
+    createNode({ x: 0, y: m.backLength }), // CF Waist
   ];
-  elements.push(generatePatternPiece(nodes, 'Child Bodice'));
+  elements.push(generatePatternPiece(nodes, 'Child Bodice Front'));
+  elements.push(createGrainline(bQ / 2, 2, m.backLength - 4));
+  
   return elements;
 };
