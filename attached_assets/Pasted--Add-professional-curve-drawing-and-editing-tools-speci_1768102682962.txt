@@ -1,0 +1,105 @@
+"Add professional curve drawing and editing tools specifically for sewing pattern work:
+FRENCH CURVE LIBRARY:
+
+Hip curve (pattern master curve)
+Armhole curve (front & back templates)
+Neckline curves (variety of depths)
+Sleeve cap curves (standard ease distributions)
+Crotch curve (pants front & back)
+Collar curves (neck edge, outer edge)
+Princess seam curves
+Side seam curves
+Hem curves (A-line, circle skirt)
+Waistband curves
+
+CURVE DRAWING TOOLS:
+
+Bezier curve tool with adjustable control handles
+Smooth freehand curve with auto-smoothing
+Point-to-point curve (click nodes, auto-smooth between)
+Curve through points (draws best-fit curve through selected points)
+Fair curve tool (automatically creates smooth, even curves)
+Spiral curve for design elements
+
+CURVE EDITING:
+
+Node editing:
+
+Add/delete nodes on curve
+Convert to corner, smooth, or symmetric nodes
+Adjust tangent handles independently
+Auto-smooth selected sections
+
+
+Curve manipulation:
+
+Push/pull curve segments
+Offset curve (parallel curves for seam allowances)
+Reverse curve direction
+Extend curve endpoints
+Join curves smoothly
+Break curve at node
+
+
+Curve refinement:
+
+Simplify curve (reduce nodes while keeping shape)
+Add curvature (increase/decrease curve depth)
+Straighten sections
+Match curve to template
+Blend between two curves
+
+
+
+PATTERN-SPECIFIC CURVE TOOLS:
+
+Sleeve Cap Generator:
+
+Input: armhole measurement, sleeve width, cap height
+Auto-generates properly shaped sleeve cap curve
+Adjustable ease distribution (front vs back)
+Cap height adjuster
+
+
+Armhole Curve Tool:
+
+Auto-fit to shoulder and side seam points
+Front vs back curve templates
+Depth and width adjusters
+Ensure proper pitch/angle
+
+
+Neckline Curve Tool:
+
+Depth and width sliders
+Style presets (jewel, scoop, V-neck, sweetheart, square)
+Front vs back drop adjustments
+Shoulder slope integration
+
+
+Crotch Curve Tool:
+
+Front vs back curve shapes
+Rise adjustment (low, mid, high)
+Inseam-to-outseam smooth transition
+Sit curve depth control
+
+
+Princess Seam Curve Tool:
+
+Dart-to-seam conversion
+Automatic matching front/side panel curves
+Waist suppression distribution
+Bust point alignment
+
+
+
+CURVE MATCHING & WALKING:
+
+Walk seam tool: Check if two curves are same length
+Measure curve length (actual vs straight-line distance)
+Match curve lengths: Auto-adjust to make seams equal
+Notch placement: Auto-place matching notches on paired curves
+Curve alignment guides: Visual overlay to compare curves
+Seam ease calculator: Show difference between joined curves
+
