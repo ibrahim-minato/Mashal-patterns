@@ -15,7 +15,9 @@ import {
   Square, Shirt, Baby, User as UserIcon, Box, Star, 
   Type, Pipette, Ruler, Move, MousePointer, Spline,
   RefreshCw, Hand, FlipHorizontal, Trash2, Grid3X3, Zap, RotateCw,
-  Columns, Rows, Grid2X2, Camera, Wand2, Info
+  Columns, Rows, Grid2X2, Camera, Wand2, Info,
+  Pentagon, Boxes, SprayCan, Brush, Pipette as Eyedropper, 
+  Triangle, Palette, MousePointerSquareDashed
 } from 'lucide-react';
 
 interface WorkspaceProps {

@@ -27,9 +27,9 @@ export interface PathNode {
 }
 
 export type ToolType = 
-  | 'select' | 'node' | 'pencil' | 'bezier' | 'rect' | 'circle' 
-  | 'star' | 'spiral' | 'text' | 'eraser' | 'bucket' | 'dropper' 
-  | 'measure' | 'compass' | 'zoom' | 'pan' | 'mirror';
+  | 'select' | 'node' | 'tweak' | 'spray' | 'brush' | 'pencil' | 'bezier' 
+  | 'rect' | 'circle' | 'poly' | 'star' | 'spiral' | 'box3d' | 'text' 
+  | 'gradient' | 'dropper' | 'bucket' | 'eraser' | 'measure' | 'zoom' | 'pan';
 
 export type SymmetryType = 'none' | 'vertical' | 'horizontal' | 'quad';
 
