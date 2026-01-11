@@ -1,0 +1,7 @@
+{
+  "name": "Mashal Patterns",
+  "description": "Smart Sewing Pattern Generator for fashion design students, offering manual drafting tools and AI-assisted pattern guidance from images and measurements.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
