@@ -8,8 +8,8 @@ export const generatePatternGuidance = async (
   type: string
 ): Promise<AIPatternResponse> => {
   // Use process.env.API_KEY directly as per guidelines
-  // Strictly following initialization format: new GoogleGenAI({ apiKey: process.env.API_KEY })
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  // Strictly following initialization format: new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY })
+  const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
   
   const prompt = `
     Act as a professional pattern maker. Analyze this garment image and provide educational pattern drafting guidance.

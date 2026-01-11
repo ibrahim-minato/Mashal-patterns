@@ -142,7 +142,7 @@ const Workspace: React.FC<WorkspaceProps> = ({ user }) => {
     selectedElements.forEach(el => {
       const b = getElementBounds(el);
       minX = Math.min(minX, b.minX); maxX = Math.max(maxX, b.maxX);
-      minY = Math.min(minY, b.minY); maxY = Math.max(maxY, b.minY, b.maxY);
+      minY = Math.min(minY, b.minY); maxY = Math.max(maxY, b.maxY);
     });
     return { x: minX, y: minY, w: maxX - minX, h: maxY - minY, cx: (minX + maxX) / 2, cy: (minY + maxY) / 2 };
   }, [elements, selectedIds]);
