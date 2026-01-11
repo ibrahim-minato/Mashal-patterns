@@ -429,7 +429,23 @@ const Workspace: React.FC<WorkspaceProps> = ({ user }) => {
         ctx.beginPath();
         if (el.type === 'rect') ctx.rect(el.nodes[0].pos.x, el.nodes[0].pos.y, el.nodes[1].pos.x-el.nodes[0].pos.x, el.nodes[1].pos.y-el.nodes[0].pos.y);
         else if (el.type === 'circle') { const r = Math.sqrt(Math.pow(el.nodes[1].pos.x-el.nodes[0].pos.x,2)+Math.pow(el.nodes[1].pos.y-el.nodes[0].pos.y,2)); ctx.arc(el.nodes[0].pos.x, el.nodes[0].pos.y, r, 0, Math.PI*2); }
-        else el.nodes.forEach((n,i) => i===0 ? ctx.moveTo(n.pos.x, n.pos.y) : ctx.lineTo(n.pos.x, n.pos.y));
+        else {
+          if (el.nodes.length > 0) {
+            ctx.moveTo(el.nodes[0].pos.x, el.nodes[0].pos.y);
+            if (el.nodes.some(n => n.type === 'smooth') && el.nodes.length > 2) {
+              for (let i = 0; i < el.nodes.length - 1; i++) {
+                const p0 = el.nodes[i].pos;
+                const p1 = el.nodes[i + 1].pos;
+                const cp = { x: (p0.x + p1.x) / 2, y: (p0.y + p1.y) / 2 };
+                ctx.quadraticCurveTo(p0.x, p0.y, cp.x, cp.y);
+              }
+              const last = el.nodes[el.nodes.length - 1];
+              ctx.lineTo(last.pos.x, last.pos.y);
+            } else {
+              el.nodes.forEach((n,i) => i===0 ? ctx.moveTo(n.pos.x, n.pos.y) : ctx.lineTo(n.pos.x, n.pos.y));
+            }
+          }
+        }
         if (el.closed) ctx.closePath();
         if (el.fill !== 'none') { ctx.fillStyle = el.fill; ctx.fill(); }
         ctx.strokeStyle = el.stroke; ctx.lineWidth = el.strokeWidth / viewport.zoom; ctx.stroke();
