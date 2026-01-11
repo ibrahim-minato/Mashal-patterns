@@ -265,7 +265,7 @@ const Workspace: React.FC<WorkspaceProps> = ({ user }) => {
     isDragging.current = true;
     dragStartWorld.current = world;
 
-    if (activeTool === 'pencil') {
+    if (activeTool === 'pencil' || activeTool === 'brush' || activeTool === 'curve') {
       setPencilPoints([worldRaw]);
     } else if (activeTool === 'eraser') {
       performErase(worldRaw);
@@ -280,7 +280,7 @@ const Workspace: React.FC<WorkspaceProps> = ({ user }) => {
         if (!e.shiftKey) setSelectedIds([]);
         if (activeTool === 'select') setSelectionMarquee({ start: worldRaw, end: worldRaw });
       }
-    } else if (['rect', 'circle', 'text'].includes(activeTool)) {
+    } else if (['rect', 'circle', 'text', 'poly', 'star', 'spiral', 'box3d'].includes(activeTool)) {
       const id = Math.random().toString(36).substr(2, 9);
       if (activeTool === 'text') {
         const txt = prompt("Label:", "FRONT");
@@ -289,7 +289,7 @@ const Workspace: React.FC<WorkspaceProps> = ({ user }) => {
         const next = [...elements, ...applySymmetryToElement(newEl, symmetryMode)];
         setElements(next); saveHistory(next);
       } else {
-        const newEl = { id, type: activeTool as any, nodes: [{ id: 'n1', pos: world, type: 'corner' }, { id: 'n2', pos: world, type: 'corner' }], x: 0, y: 0, scaleX: 1, scaleY: 1, rotation: 0, fill: fillColor, stroke: strokeColor, strokeWidth, opacity: 1, visible: true, locked: false, layerId: 'l1', name: 'Shape', closed: true } as VectorElement;
+        const newEl = { id, type: (activeTool === 'box3d' ? 'rect' : activeTool) as any, nodes: [{ id: 'n1', pos: world, type: 'corner' }, { id: 'n2', pos: world, type: 'corner' }], x: 0, y: 0, scaleX: 1, scaleY: 1, rotation: 0, fill: fillColor, stroke: strokeColor, strokeWidth, opacity: 1, visible: true, locked: false, layerId: 'l1', name: 'Shape', closed: true } as VectorElement;
         const next = [...elements, ...applySymmetryToElement(newEl, symmetryMode)];
         setElements(next); setSelectedIds([id]); saveHistory(next);
       }
@@ -359,12 +359,12 @@ const Workspace: React.FC<WorkspaceProps> = ({ user }) => {
         return;
       }
       if (selectionMarquee) setSelectionMarquee(p => p ? { ...p, end: worldRaw } : null);
-      else if (activeTool === 'pencil') setPencilPoints(p => [...p, worldRaw]);
+      else if (activeTool === 'pencil' || activeTool === 'brush' || activeTool === 'curve') setPencilPoints(p => [...p, worldRaw]);
       else if (activeTool === 'eraser') performErase(worldRaw);
       else if (activeTool === 'select' && selectedIds.length > 0) {
         const dx = world.x - dragStartWorld.current.x; const dy = world.y - dragStartWorld.current.y;
         if (dx || dy) { setElements(p => p.map(el => selectedIds.includes(el.id) ? { ...el, x: el.x + dx, y: el.y + dy } : el)); dragStartWorld.current = world; }
-      } else if (['rect', 'circle'].includes(activeTool) && selectedIds.length > 0) {
+      } else if (['rect', 'circle', 'poly', 'star', 'spiral', 'box3d'].includes(activeTool) && selectedIds.length > 0) {
         setElements(p => p.map(el => el.id === selectedIds[0] ? { ...el, nodes: [el.nodes[0], { ...el.nodes[1], pos: world }] } : el));
       }
     }
@@ -378,12 +378,12 @@ const Workspace: React.FC<WorkspaceProps> = ({ user }) => {
       const sel = elements.filter(el => { const b = getElementBounds(el); return b.minX >= x1 && b.maxX <= x2 && b.minY >= y1 && b.maxY <= y2; }).map(el => el.id);
       setSelectedIds(sel); setSelectionMarquee(null);
     }
-    if (activeTool === 'pencil' && pencilPoints.length > 2) {
-      const det = shapeAssist ? detectShape(pencilPoints) : { type: 'path' };
+    if ((activeTool === 'pencil' || activeTool === 'brush' || activeTool === 'curve') && pencilPoints.length > 2) {
+      const det = shapeAssist && activeTool === 'pencil' ? detectShape(pencilPoints) : { type: 'path' };
       let base: any;
       if (det.type === 'circle') base = { id: Math.random().toString(36).substr(2,9), type: 'circle', nodes: [{id:'c', pos:(det.bounds as any).center, type:'corner'}, {id:'r', pos:{x:(det.bounds as any).center.x+(det.bounds as any).radius, y:(det.bounds as any).center.y}, type:'corner'}], closed: true, fill: fillColor, stroke: strokeColor, strokeWidth, opacity:1, x:0,y:0,scaleX:1,scaleY:1,rotation:0, name:'Circle' };
       else if (det.type === 'rect') base = { id: Math.random().toString(36).substr(2,9), type: 'rect', nodes: [{id:'n1', pos:(det.bounds as any).min, type:'corner'}, {id:'n2', pos:(det.bounds as any).max, type:'corner'}], closed: true, fill: fillColor, stroke: strokeColor, strokeWidth, opacity:1, x:0,y:0,scaleX:1,scaleY:1,rotation:0, name:'Rect' };
-      else base = { id: Math.random().toString(36).substr(2,9), type: 'path', nodes: pencilPoints.map((p,i)=>({id:`p${i}`, pos:p, type:'corner'})), closed: false, fill: 'none', stroke: strokeColor, strokeWidth, opacity:1, x:0,y:0,scaleX:1,scaleY:1,rotation:0, name:'Path' };
+      else base = { id: Math.random().toString(36).substr(2,9), type: 'path', nodes: pencilPoints.map((p,i)=>({id:`p${i}`, pos:p, type: activeTool === 'curve' ? 'smooth' : 'corner'})), closed: false, fill: 'none', stroke: strokeColor, strokeWidth, opacity:1, x:0,y:0,scaleX:1,scaleY:1,rotation:0, name: activeTool === 'curve' ? 'Curve' : 'Path' };
       const next = [...elements, ...applySymmetryToElement(base, symmetryMode)];
       setElements(next); saveHistory(next); setPencilPoints([]);
     }
