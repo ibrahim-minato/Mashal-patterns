@@ -138,24 +138,44 @@ export const generateMensShirt = (m: Measurements): VectorElement[] => {
 /**
  * CHILDREN'S BASIC BLOCKS (Ages 2-16)
  */
-export const generateChildBodice = (m: Measurements): VectorElement[] => {
+/**
+ * FRENCH CURVE LIBRARY
+ */
+export const generateFrenchCurve = (type: 'hip' | 'armhole' | 'neckline' | 'crotch'): VectorElement[] => {
   const elements: VectorElement[] = [];
-  const bQ = (m.bust / 4) + 1; // Basic ease for children
-  const wQ = (m.waist / 4) + 1;
-  const neckW = 2.5;
-  const neckD = 2.5;
-  const sSlope = 1;
-  
-  const nodes = [
-    createNode({ x: 0, y: neckD }), // CF Neck
-    createNode({ x: neckW, y: 0 }), // HPS
-    createNode({ x: m.shoulderWidth, y: sSlope }), // Shoulder
-    createNode({ x: bQ, y: 6 }), // Armhole bottom
-    createNode({ x: wQ, y: m.backLength }), // Waist
-    createNode({ x: 0, y: m.backLength }), // CF Waist
-  ];
-  elements.push(generatePatternPiece(nodes, 'Child Bodice Front'));
-  elements.push(createGrainline(bQ / 2, 2, m.backLength - 4));
-  
+  let nodes: PathNode[] = [];
+  let name = '';
+
+  if (type === 'hip') {
+    name = 'Hip Curve';
+    nodes = [
+      createNode({ x: 0, y: 0 }, 'smooth'),
+      createNode({ x: 2, y: 8 }, 'smooth'),
+      createNode({ x: 5, y: 24 }, 'smooth'),
+    ];
+  } else if (type === 'armhole') {
+    name = 'Armhole Curve';
+    nodes = [
+      createNode({ x: 0, y: 0 }, 'smooth'),
+      createNode({ x: 3, y: 4 }, 'smooth'),
+      createNode({ x: 8, y: 6 }, 'smooth'),
+    ];
+  } else if (type === 'neckline') {
+    name = 'Neckline Curve';
+    nodes = [
+      createNode({ x: 0, y: 0 }, 'smooth'),
+      createNode({ x: 4, y: 3 }, 'smooth'),
+      createNode({ x: 8, y: 0 }, 'smooth'),
+    ];
+  } else if (type === 'crotch') {
+    name = 'Crotch Curve';
+    nodes = [
+      createNode({ x: 0, y: 0 }, 'smooth'),
+      createNode({ x: 2, y: 5 }, 'smooth'),
+      createNode({ x: 8, y: 8 }, 'smooth'),
+    ];
+  }
+
+  elements.push(generatePatternPiece(nodes, name, 'none', '#6366f1', false));
   return elements;
 };

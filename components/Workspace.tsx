@@ -49,7 +49,8 @@ const Workspace: React.FC<WorkspaceProps> = ({ user }) => {
   const [elements, setElements] = useState<VectorElement[]>([]);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [viewport, setViewport] = useState<Viewport>({ x: 300, y: 200, zoom: 0.8 });
-  const [activeSidebarTab, setActiveSidebarTab] = useState<'measurements' | 'blocks' | 'ai' | 'properties'>('measurements');
+  const [activeSidebarTab, setActiveSidebarTab] = useState<'measurements' | 'blocks' | 'curves' | 'ai' | 'properties'>('measurements');
+  const [blockCategory, setBlockCategory] = useState<'women' | 'men' | 'children' | 'unisex'>('women');
 
   useEffect(() => {
     if (selectedIds.length > 0) {
@@ -565,11 +566,33 @@ const Workspace: React.FC<WorkspaceProps> = ({ user }) => {
           <div className="flex border-b border-white/5 bg-black/40">
             <TabBtn id="measurements" icon={Sliders} label="Measures" />
             <TabBtn id="blocks" icon={Library} label="Blocks" />
+            <TabBtn id="curves" icon={Compass} label="French Curves" />
             <TabBtn id="ai" icon={Sparkles} label="AI Asst" />
             <TabBtn id="properties" icon={Sliders} label="Object" />
           </div>
 
           <div className="flex-grow overflow-y-auto custom-scrollbar p-6">
+            {activeSidebarTab === 'curves' && (
+              <div className="space-y-4">
+                <p className="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-4">French Curve Library</p>
+                <div className="grid grid-cols-1 gap-3">
+                  {[
+                    { id: 'hip', name: 'Hip Curve' },
+                    { id: 'armhole', name: 'Armhole Curve' },
+                    { id: 'neckline', name: 'Neckline Curve' },
+                    { id: 'crotch', name: 'Crotch Curve' },
+                  ].map((curve) => (
+                    <button
+                      key={curve.id}
+                      onClick={() => setElements([...elements, ...Blocks.generateFrenchCurve(curve.id as any)])}
+                      className="w-full p-4 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between hover:bg-white/10 transition-all text-sm font-bold"
+                    >
+                      {curve.name} <ChevronRight size={16} className="text-indigo-400" />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
             {activeSidebarTab === 'properties' && (
               <div className="space-y-6">
                 <p className="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-4">Object Properties</p>
