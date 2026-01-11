@@ -27,7 +27,7 @@ export interface PathNode {
 }
 
 export type ToolType = 
-  | 'select' | 'node' | 'tweak' | 'spray' | 'brush' | 'pencil' | 'bezier' 
+  | 'select' | 'node' | 'tweak' | 'spray' | 'brush' | 'pencil' | 'bezier' | 'curve'
   | 'rect' | 'circle' | 'poly' | 'star' | 'spiral' | 'box3d' | 'text' 
   | 'gradient' | 'dropper' | 'bucket' | 'eraser' | 'measure' | 'zoom' | 'pan';
 

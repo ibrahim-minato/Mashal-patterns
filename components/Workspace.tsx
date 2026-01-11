@@ -524,6 +524,7 @@ const Workspace: React.FC<WorkspaceProps> = ({ user }) => {
             {id:'brush',icon:Brush},
             {id:'pencil',icon:Pencil},
             {id:'bezier',icon:PenTool},
+            {id:'curve',icon:Spline},
             {id:'rect',icon:Square},
             {id:'circle',icon:CircleDot},
             {id:'poly',icon:Pentagon},
