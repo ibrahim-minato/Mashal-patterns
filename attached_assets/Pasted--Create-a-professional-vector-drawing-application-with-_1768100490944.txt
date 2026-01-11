@@ -1,0 +1,138 @@
+"Create a professional vector drawing application with an advanced workspace modeled after Inkscape, including:
+MAIN WORKSPACE LAYOUT:
+
+Large central canvas with infinite zoom and pan
+Customizable dark/light theme
+Rulers on top and left edges with adjustable units (px, mm, in, pt)
+Draggable guidelines from rulers
+Status bar showing coordinates, zoom level, object info
+Multiple document tabs
+
+ADVANCED TOOLBOX (Left Sidebar):
+
+Selection tool (move, scale, rotate, skew)
+Node editing tool (Bezier paths with handles)
+Tweak tool (sculpt/push/pull paths)
+Spray tool (scatter clones)
+Calligraphy/brush tool with pressure sensitivity
+Shape tools (rectangle, circle, polygon, star, spiral)
+3D box tool (perspective drawing)
+Bezier/pen tool (draw custom paths)
+Pencil tool (freehand)
+Text tool with full typography controls
+Gradient tool (linear, radial)
+Eyedropper/color picker
+Paint bucket (fill bounded areas)
+Eraser with vector subtraction
+
+TOP TOOLBAR (Context-Sensitive):
+
+Changes based on selected tool
+Numerical input boxes for precise values
+Stroke width, style, caps, joins
+Fill and stroke selectors
+Opacity controls
+Blend modes (multiply, screen, overlay, etc.)
+
+RIGHT PANEL (Collapsible Sections):
+
+Fill & Stroke panel: Flat color, gradients, patterns, none
+Layers panel: Show/hide, lock, reorder, group management
+Align & Distribute: Alignment to page, selection, grid
+Transform panel: Precise position, size, rotation, skew inputs
+Text & Font: Font family, size, spacing, alignment
+Path Effects (Live): Bend, pattern along path, envelope deformation, rough edges
+Filters: Blur, drop shadow, glow, bevel, artistic effects
+Objects panel: Tree view of all elements
+Symbols library: Drag-and-drop reusable elements
+
+ADVANCED PATTERN FEATURES:
+
+Tiled Clones dialog: Full Inkscape P1-P6 symmetry groups with:
+
+Shift (per row/column with %)
+Scale (progressive sizing)
+Rotation (per row/column in degrees)
+Color/opacity shifts with HSL controls
+Randomization sliders for all parameters
+Exclude tiles checkbox pattern
+Remove overlaps option
+Live preview with apply/reset buttons
+
+
+Pattern creator: Convert any selection to reusable pattern fill
+Pattern editor: Edit patterns in isolated mode
+Spray clone settings: Size, amount, rotation, scale variation
+Interpolate function: Create in-between steps between two objects
+
+SYMMETRY & LIVE PATH EFFECTS:
+
+Real-time mirror symmetry (1-16 axes)
+Rotational symmetry (2-32 copies)
+Envelope/mesh deform
+Bend path
+Pattern along path
+Rough/hand-drawn effect
+Hatches (crosshatch fills)
+Measure lines
+Construct grid
+Lattice deformation
+
+PATH OPERATIONS:
+
+Union, Difference, Intersection, Exclusion, Division
+Inset/Outset paths
+Dynamic offset (live)
+Simplify path
+Reverse path direction
+Break apart/combine
+Path to object/stroke to path
+
+ADVANCED FEATURES:
+
+Snap controls: Detailed snap toolbar with options for:
+
+Grid snap (adjustable spacing)
+Guide snap
+Object snap (nodes, paths, centers, edges)
+Page border snap
+Rotation snap (15°, 30°, 45° increments)
+
+
+Grid options:
+
+Rectangular, axonometric, isometric
+Custom spacing and angles
+Major/minor grid lines
+Multiple grids simultaneously
+
+
+Extensions menu: Scriptable operations
+Bezier tool modes: Straight lines, curves, multiple node types (corner, smooth, symmetric, auto-smooth)
+Clipping & masking: Vector masks with editing
+Boolean operations: Non-destructive compound paths
+Trace bitmap: Convert raster to vector
+
+KEYBOARD SHORTCUTS:
+
+Full customizable shortcut system
+Quick access: G (gradient), D (duplicate), Ctrl+D (clone), Ctrl+G (group)
+Number keys for zoom presets
+Tab to cycle through objects
+
+EXPORT OPTIONS:
+
+SVG (native format)
+PNG with DPI settings
+PDF, EPS export
+Batch export multiple objects
+Export selection only
+
+PERFORMANCE:
+
+Hardware acceleration for smooth zooming
+Outline/preview mode toggle
+Gaussian blur quality settings
+Undo/redo with history slider (50+ steps)
+
+Make the interface fully responsive, with collapsible panels and customizable workspace layouts that can be saved as presets."
